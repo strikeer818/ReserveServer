@@ -28,4 +28,8 @@ public partial class Reservation
     [Column("special_requests")]
     [StringLength(255)]
     public string? SpecialRequests { get; set; }
+
+    [ForeignKey("CustomerId")]
+    [InverseProperty("Reservations")]
+    public virtual Customer Customer { get; set; } = null!;
 }

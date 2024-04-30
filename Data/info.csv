@@ -1,14 +1,14 @@
-customer_id,name,email,phone_number,reservation_id,reservation_date,reservation_time,party_size,special_requests
-1,John Doe,johndoe@example.com,555-123-4567,1,2024-04-11,18:00,4,Window seat preferred
-2,Jane Smith,janesmith@example.com,555-987-6543,2,2024-04-12,19:30,2,No dietary restrictions
-3,Michael Johnson,michaeljohnson@example.com,555-111-2222,3,2024-04-13,20:00,6,Vegetarian options requested
-4,Emily Brown,emilybrown@example.com,555-333-4444,4,2024-04-14,18:30,3,,High chair needed for infant
-5,David Wilson,davidwilson@example.com,555-555-6666,5,2024-04-15,17:00,5,,Prefer outdoor seating
-6,Sarah Taylor,sarahtaylor@example.com,555-777-8888,6,2024-04-16,19:00,2,No special requests
-7,James Anderson,jamesanderson@example.com,555-999-0000,7,2024-04-17,18:30,4,Anniversary celebration
-8,Olivia Martinez,oliviamartinez@example.com,555-121-2121,8,2024-04-18,20:00,2,,Date night
-9,Ethan Thompson,ethanthompson@example.com,555-343-4343,9,2024-04-19,19:30,3,,Birthday party
-10,Ava Garcia,avagarcia@example.com,555-565-6565,10,2024-04-20,18:00,5,,Family dinner
-11,Liam Hernandez,liamhernandez@example.com,555-787-8787,11,2024-04-21,17:30,2,No special requests
-12,Emma Martinez,emmamartinez@example.com,555-909-0909,12,2024-04-22,19:00,4,,Business meeting
-13,Noah Rodriguez,noahrodriguez@example.com,555-232-3232,13,2024-04-23,20:00,6,Private room requested
+"name","email","phone_number","reservation_date","reservation_time","party_size","special_requests"
+"John Doe","johndoe@example.com","555-123-4567","2024-04-11","18:00","4","Window seat preferred"
+"Jane Smith","janesmith@example.com","555-987-6543","2024-04-12","19:30","2","No dietary restrictions"
+"Michael Johnson","michaeljohnson@example.com","555-111-2222","2024-04-13","20:00","6","Vegetarian options requested"
+"Emily Brown","emilybrown@example.com","555-333-4444","2024-04-14","18:30","3","High chair needed for infant"
+"David Wilson","davidwilson@example.com","555-555-6666","2024-04-15","17:00","5","Prefer outdoor seating"
+"Sarah Taylor","sarahtaylor@example.com","555-777-8888","2024-04-16","19:00","2","No special requests"
+"James Anderson","jamesanderson@example.com","555-999-0000","2024-04-17","18:30","4","Anniversary celebration"
+"Olivia Martinez","oliviamartinez@example.com","555-121-2121","2024-04-18","20:00","2","Date night"
+"Ethan Thompson","ethanthompson@example.com","555-343-4343","2024-04-19","19:30","3","Birthday party"
+"Ava Garcia","avagarcia@example.com","555-565-6565","2024-04-20","18:00","5","Family dinner"
+"Liam Hernandez","liamhernandez@example.com","555-787-8787","2024-04-21","17:30","2","No special requests"
+"Emma Martinez","emmamartinez@example.com","555-909-0909","2024-04-22","19:00","4","Business meeting"
+"Noah Rodriguez","noahrodriguez@example.com","555-232-3232","2024-04-23","20:00","6","Private room requested"

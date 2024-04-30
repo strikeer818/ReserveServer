@@ -12,8 +12,8 @@ using ReserveServer.ReserveModel;
 namespace ReserveServer.Migrations
 {
     [DbContext(typeof(ReservationGoldenContext))]
-    [Migration("20240426065100_initialDesign")]
-    partial class initialDesign
+    [Migration("20240430050024_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,11 +52,20 @@ namespace ReserveServer.Migrations
                         .HasColumnType("nvarchar(20)")
                         .HasColumnName("phone");
 
+                    b.HasKey("CustomerId");
+
                     b.ToTable("Customer");
                 });
 
             modelBuilder.Entity("ReserveServer.ReserveModel.Reservation", b =>
                 {
+                    b.Property<int>("ReservationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("reservation_id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReservationId"));
+
                     b.Property<int>("CustomerId")
                         .HasColumnType("int")
                         .HasColumnName("customer_id");
@@ -69,13 +78,6 @@ namespace ReserveServer.Migrations
                         .HasColumnType("date")
                         .HasColumnName("reservation_date");
 
-                    b.Property<int>("ReservationId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("reservation_id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReservationId"));
-
                     b.Property<TimeOnly>("ReservationTime")
                         .HasColumnType("time")
                         .HasColumnName("reservation_time");
@@ -85,7 +87,27 @@ namespace ReserveServer.Migrations
                         .HasColumnType("nvarchar(255)")
                         .HasColumnName("special_requests");
 
+                    b.HasKey("ReservationId");
+
+                    b.HasIndex("CustomerId");
+
                     b.ToTable("Reservation");
+                });
+
+            modelBuilder.Entity("ReserveServer.ReserveModel.Reservation", b =>
+                {
+                    b.HasOne("ReserveServer.ReserveModel.Customer", "Customer")
+                        .WithMany("Reservations")
+                        .HasForeignKey("CustomerId")
+                        .IsRequired()
+                        .HasConstraintName("FK_Reservation_Customer");
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("ReserveServer.ReserveModel.Customer", b =>
+                {
+                    b.Navigation("Reservations");
                 });
 #pragma warning restore 612, 618
         }

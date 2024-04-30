@@ -5,7 +5,7 @@ namespace ReserveServer.Data
 {
     public class ReserveCustomersCSV
     {
-        public int customerId { get; set; }
+        //public int customer_id { get; set; }
 
         public string name { get; set; } = null!;
 
@@ -13,7 +13,7 @@ namespace ReserveServer.Data
 
         public string phone_number { get; set; } = null!;
 
-        public int reservation_id { get; set; }
+        //public int reservation_id { get; set; }
 
         public DateOnly reservation_date { get; set; }
 

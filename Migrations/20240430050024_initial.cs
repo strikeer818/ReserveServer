@@ -11,7 +11,7 @@ namespace ReserveServer.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
+            /*migrationBuilder.CreateTable(
                 name: "Customer",
                 columns: table => new
                 {
@@ -23,6 +23,7 @@ namespace ReserveServer.Migrations
                 },
                 constraints: table =>
                 {
+                    table.PrimaryKey("PK_Customer", x => x.customer_id);
                 });
 
             migrationBuilder.CreateTable(
@@ -39,17 +40,28 @@ namespace ReserveServer.Migrations
                 },
                 constraints: table =>
                 {
+                    table.PrimaryKey("PK_Reservation", x => x.reservation_id);
+                    table.ForeignKey(
+                        name: "FK_Reservation_Customer",
+                        column: x => x.customer_id,
+                        principalTable: "Customer",
+                        principalColumn: "customer_id");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reservation_customer_id",
+                table: "Reservation",
+                column: "customer_id");*/
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Customer");
+           /* migrationBuilder.DropTable(
+                name: "Reservation");
 
             migrationBuilder.DropTable(
-                name: "Reservation");
+                name: "Customer");*/
         }
     }
 }

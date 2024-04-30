@@ -24,4 +24,7 @@ public partial class Customer
     [Column("phone")]
     [StringLength(20)]
     public string Phone { get; set; } = null!;
+
+    [InverseProperty("Customer")]
+    public virtual ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
 }
