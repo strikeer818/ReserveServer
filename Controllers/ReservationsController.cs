@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,27 +13,21 @@ namespace ReserveServer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ReservationsController : ControllerBase
+    public class ReservationsController(ReservationGoldenContext context) : ControllerBase
     {
-        private readonly ReservationGoldenContext _context;
-
-        public ReservationsController(ReservationGoldenContext context)
-        {
-            _context = context;
-        }
 
         // GET: api/Reservations
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Reservation>>> GetReservations()
+        public async Task<ActionResult<IEnumerable<Reservation>>> GetReservation()
         {
-            return await _context.Reservations.ToListAsync();
+            return await context.Reservations.ToListAsync();
         }
 
         // GET: api/Reservations/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Reservation>> GetReservation(int id)
         {
-            var reservation = await _context.Reservations.FindAsync(id);
+            var reservation = await context.Reservations.FindAsync(id);
 
             if (reservation == null)
             {
@@ -40,6 +36,15 @@ namespace ReserveServer.Controllers
 
             return reservation;
         }
+
+        //[Authorize]
+        [HttpGet("ReservationCustomers/{id}")]
+        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomersByReservation(int id)
+        {
+            return await context.Customers.Where(r => r.CustomerId == id).ToListAsync(); ///
+        }
+
+        // GET: api/Reservations/5
 
         // PUT: api/Reservations/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -51,11 +56,11 @@ namespace ReserveServer.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(reservation).State = EntityState.Modified;
+            context.Entry(reservation).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -77,31 +82,31 @@ namespace ReserveServer.Controllers
         [HttpPost]
         public async Task<ActionResult<Reservation>> PostReservation(Reservation reservation)
         {
-            _context.Reservations.Add(reservation);
-            await _context.SaveChangesAsync();
+            context.Reservations.Add(reservation);
+            await context.SaveChangesAsync();
 
             return CreatedAtAction("GetReservation", new { id = reservation.ReservationId }, reservation);
         }
 
-        // DELETE: api/Reservations/5
+        // DELETE: api/Reservation/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteReservation(int id)
         {
-            var reservation = await _context.Reservations.FindAsync(id);
+            var reservation = await context.Reservations.FindAsync(id);
             if (reservation == null)
             {
                 return NotFound();
             }
 
-            _context.Reservations.Remove(reservation);
-            await _context.SaveChangesAsync();
+            context.Reservations.Remove(reservation);
+            await context.SaveChangesAsync();
 
             return NoContent();
         }
 
         private bool ReservationExists(int id)
         {
-            return _context.Reservations.Any(e => e.ReservationId == id);
+            return context.Reservations.Any(e => e.ReservationId == id);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace ReserveServer.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            /*migrationBuilder.CreateTable(
+            migrationBuilder.CreateTable(
                 name: "Customer",
                 columns: table => new
                 {
@@ -51,17 +51,17 @@ namespace ReserveServer.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Reservation_customer_id",
                 table: "Reservation",
-                column: "customer_id");*/
+                column: "customer_id");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-           /* migrationBuilder.DropTable(
+            migrationBuilder.DropTable(
                 name: "Reservation");
 
             migrationBuilder.DropTable(
-                name: "Customer");*/
+                name: "Customer");
         }
     }
 }
