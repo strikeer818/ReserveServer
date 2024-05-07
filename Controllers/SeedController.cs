@@ -9,6 +9,7 @@ using CsvHelper;
 using CsvHelper.Configuration;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ReserveServer.Data;
@@ -22,11 +23,36 @@ namespace ReserveServer.Controllers
     {
         private readonly ReservationGoldenContext _db;
         private readonly string _pathName;
+        private readonly UserManager<ReservationCustomerUser> _userManager;
 
-        public SeedController(ReservationGoldenContext db, IWebHostEnvironment environment)
+        public SeedController(ReservationGoldenContext db, IWebHostEnvironment environment, UserManager<ReservationCustomerUser> userManager)
         {
             _db = db;
             _pathName = Path.Combine(environment.ContentRootPath, "Data/info.csv");
+            _userManager = userManager;
+        }
+
+        [HttpPost("User")]
+        public async Task<ActionResult> SeedUsers()
+        {
+            (string name, string email) = ("user1", "comp584@csun.edu");
+            ReservationCustomerUser user = new()
+            {
+                UserName = name,
+                Email = email,
+                SecurityStamp = Guid.NewGuid().ToString()
+            };
+            if (await _userManager.FindByNameAsync(name) is not null)
+            {
+                user.UserName = "user2";
+            }
+            _ = await _userManager.CreateAsync(user, "P@ssw0rd!")
+                ?? throw new InvalidOperationException();
+            user.EmailConfirmed = true;
+            user.LockoutEnabled = false;
+            await _db.SaveChangesAsync();
+
+            return Ok();
         }
 
         [HttpPost("Customer")]

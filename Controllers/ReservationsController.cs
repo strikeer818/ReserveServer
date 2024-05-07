@@ -37,7 +37,7 @@ namespace ReserveServer.Controllers
             return reservation;
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpGet("ReservationCustomers/{id}")]
         public async Task<ActionResult<IEnumerable<Customer>>> GetCustomersByReservation(int id)
         {
