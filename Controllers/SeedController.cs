@@ -58,8 +58,7 @@ namespace ReserveServer.Controllers
         [HttpPost("Customer")]
         public async Task<ActionResult<Reservation>> SeedCustomer()
         {
-            // create a lookup dictionary containing all the countries already existing 
-            // into the Database (it will be empty on first run).
+
             Dictionary<string, Customer> customersByName = _db.Customers
                 .AsNoTracking().ToDictionary(x => x.Name, StringComparer.OrdinalIgnoreCase);
 

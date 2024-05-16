@@ -14,7 +14,7 @@ namespace ReserveServer.Controllers
     [ApiController]
     public class CustomersController(ReservationGoldenContext context) : ControllerBase
     {
-        // GET: api/Cities
+        // GET: api/Customers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
         {
